@@ -11,6 +11,7 @@ class App extends Component {
       username: '',
       password: ''
     }
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
   emitEmpty = () => {
@@ -22,11 +23,15 @@ class App extends Component {
     this.setState({ username: e.target.value });
   }
 
+  onChangePassword = (e) => {
+    this.setState({password: e.target.value});
+  }
+
   handleLogin(event) {
     event.preventDefault();
     const body = {
-      username: this.props.username,
-      password: this.props.password
+      username: this.state.username,
+      password: this.state.password
     }
     API.login(body).then(
       response => {
@@ -56,11 +61,14 @@ class App extends Component {
           placeholder="Input password" 
           prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
           value={password}
+          onChange={this.onChangePassword}
         />
         <Button 
           type="primary"
-          onClick={this.handleLogin.bind(this)}
-        >登录</Button>
+          onClick={this.handleLogin}
+        >
+          登录
+        </Button>
       </div>
     );
   }

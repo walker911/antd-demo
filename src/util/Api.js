@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-// const api = "http://localhost:9090";
+const api = "/api/v1";
 
 export const login = (body) => 
-    axios.post(`/api/v1/user/login`, body)
+    axios.post(`${api}/user/login`, body, {
+        headers: {
+            'Authorization': 'Basic YXV0aC1zZXJ2aWNlOjEyMzQ1Ng=='
+        }
+    })
